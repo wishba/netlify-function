@@ -12,8 +12,7 @@ const CREATE_TODO = `
 
 exports.handler = async event => {
   const { title, completed } = JSON.parse(event.body)
-  const { data, errors } = await query(
-    CREATE_TODO, { title, completed })
+  const { data, errors } = await query(CREATE_TODO, { title, completed })
 
   if (errors) {
     return {
