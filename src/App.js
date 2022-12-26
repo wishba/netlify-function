@@ -1,6 +1,6 @@
 import './App.css';
 import axios from 'axios';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 function App() {
 
@@ -52,14 +52,14 @@ function App() {
           <input className='form__input' type="text" name="ftitle" id="ftitle" />
         </div>
         <div className="form__flex">
-          <input type="radio" name="fcomplete" id="fcomplete" />
+          <input className='form__check' type="checkbox" name="fcomplete" id="fcomplete" />
           <label htmlFor="fcomplete">Complete</label>
           <input className='form__submit form__input' type="submit" value="Save" />
         </div>
       </form>
 
       {/* display all todo */}
-      <h2>Todo</h2>
+      <h2>Todo!</h2>
       <ul>
         {todos.map(todo => (
           <li key={todo._id}>

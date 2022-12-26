@@ -1,9 +1,16 @@
 .App {
   background-color: #282c34;
   min-height: 100vh;
-  font-size: calc(10px + 2vmin);
   color: white;
   padding: 2rem 1rem;
+}
+
+h2 {
+  margin-bottom: 0;
+}
+
+h2+* {
+  margin-top: .5rem;
 }
 
 .form {
@@ -21,6 +28,10 @@
 .form__input {
   margin-left: auto;
   border-radius: 5px;
+}
+
+.form__check {
+  margin-right: .5rem;
 }
 
 .form__submit {
