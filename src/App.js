@@ -4,46 +4,20 @@ import { useEffect, useState } from 'react';
 
 function App() {
 
-  // test hello world!
-  const [message, setMessage] = useState()
-  const fetchData = async () => {
-    const result = await axios.get('/.netlify/functions/helloWorld')
-    setMessage(result.data.message)
-  }
-  useEffect(() => {
-    fetchData()
-  }, [])
-
   // get all todo
   const [todos, setTodos] = useState([])
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState(null)
   useEffect(() => {
     async function fetchData() {
-      setLoading(true)
-      setError(null)
-
-      try {
-        const response = await axios.get('/api/getTodos')
-        const result = response.data
-        setTodos(result.graphql)
-      } catch (error) {
-        setError(error)
-      }
-
-      setLoading(false)
+      const response = await axios.get('/api/getTodos')
+      const result = response.data
+      setTodos(result.graphql)
     }
-
     fetchData()
   }, [])
-  if (loading) return 'Loading...'
-  if (error) return `Error! ${error.message}`
 
   return (
     <div className="App">
-
-      {/* test hello world! */}
-      <h1>{message}</h1>
+      <h1>Todo!</h1>
 
       {/* form */}
       <form className='form' action="">
@@ -59,13 +33,10 @@ function App() {
       </form>
 
       {/* display all todo */}
-      <h2>Todo!</h2>
       <ul>
         {todos.map(todo => (
           <li key={todo._id}>
-            {/* <p contentEditable={true}> */}
             {todo.title} ({todo.completed ? 'completed' : 'incomplete'})
-            {/* </p> */}
           </li>
         ))}
       </ul>
