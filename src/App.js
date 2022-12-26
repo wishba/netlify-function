@@ -18,18 +18,18 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>{message}</p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>{message}</h1>
+      <form className='form' action="">
+        <div className="form__flex">
+          <label className='' htmlFor="ftitle">Todo</label>
+          <input className='form__input' type="text" name="ftitle" id="ftitle" />
+        </div>
+        <div className="form__flex">
+          <input className='' type="radio" name="fcomplete" id="fcomplete" />
+          <label className='' htmlFor="fcomplete">Complete</label>
+          <input className='form__input' type="submit" value="Save" />
+        </div>
+      </form>
     </div>
   );
 }
