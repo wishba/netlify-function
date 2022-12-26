@@ -21,13 +21,13 @@ function App() {
       <h1>{message}</h1>
       <form className='form' action="">
         <div className="form__flex">
-          <label className='' htmlFor="ftitle">Todo</label>
+          <label htmlFor="ftitle">Todo</label>
           <input className='form__input' type="text" name="ftitle" id="ftitle" />
         </div>
         <div className="form__flex">
-          <input className='' type="radio" name="fcomplete" id="fcomplete" />
-          <label className='' htmlFor="fcomplete">Complete</label>
-          <input className='form__input' type="submit" value="Save" />
+          <input type="radio" name="fcomplete" id="fcomplete" />
+          <label htmlFor="fcomplete">Complete</label>
+          <input className='form__submit form__input' type="submit" value="Save" />
         </div>
       </form>
     </div>
