@@ -1,6 +1,6 @@
 import './App.css';
 import axios from 'axios';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 function App() {
 
@@ -63,7 +63,9 @@ function App() {
       <ul>
         {todos.map(todo => (
           <li key={todo._id}>
+            {/* <p contentEditable={true}> */}
             {todo.title} ({todo.completed ? 'completed' : 'incomplete'})
+            {/* </p> */}
           </li>
         ))}
       </ul>
