@@ -18,7 +18,7 @@ h1 {
 
 .form__flex {
   display: flex;
-  margin-bottom: .5rem;
+  margin: .5rem auto;
 }
 
 .form__input {
