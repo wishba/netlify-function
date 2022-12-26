@@ -23,4 +23,11 @@ h1 {
 
 .form__input {
   margin-left: auto;
+  border-radius: 5px;
+}
+
+.form__submit {
+  color: #282c34;
+  background-color: white;
+  border: none;
 }
