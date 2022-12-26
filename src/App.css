@@ -3,10 +3,7 @@
   min-height: 100vh;
   font-size: calc(10px + 2vmin);
   color: white;
-}
-
-h1 {
-  margin: 0;
+  padding: 2rem 1rem;
 }
 
 .form {
