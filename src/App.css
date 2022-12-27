@@ -1,8 +1,13 @@
+:root {
+  --color-dark: #282c34;
+  --color-light: white;
+}
+
 .App {
-  background-color: #282c34;
+  background-color: var(--color-dark);
   min-height: 100vh;
-  color: white;
-  padding: 2rem 1rem;
+  color: var(--color-light);
+  padding: 1rem;
 }
 
 h2 {
@@ -13,9 +18,18 @@ h2+* {
   margin-top: .5rem;
 }
 
+input[type="checkbox"] {
+  margin-right: .5rem;
+}
+
+ul {
+  list-style: none;
+  padding-left: 0;
+}
+
 .form {
   width: 14rem;
-  border: 5px solid white;
+  border: 5px solid var(--color-light);
   border-radius: 10px;
   padding: 1rem;
 }
@@ -30,12 +44,13 @@ h2+* {
   border-radius: 5px;
 }
 
-.form__check {
-  margin-right: .5rem;
+.form__save,
+.list__delete {
+  color: var(--color-dark);
+  border: none;
 }
 
-.form__submit {
-  color: #282c34;
-  background-color: white;
-  border: none;
+.list__delete {
+  border-radius: 5px;
+  margin-left: .5rem;
 }
