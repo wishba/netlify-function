@@ -26,9 +26,9 @@ function App() {
           <input className='form__input' type="text" name="ftitle" id="ftitle" />
         </div>
         <div className="form__flex">
-          <input className='form__check' type="checkbox" name="fcomplete" id="fcomplete" />
+          <input type="checkbox" name="fcomplete" id="fcomplete" />
           <label htmlFor="fcomplete">Complete</label>
-          <input className='form__submit form__input' type="submit" value="Save" />
+          <input className='form__save form__input' type="submit" value="Save" />
         </div>
       </form>
 
@@ -36,7 +36,11 @@ function App() {
       <ul>
         {todos.map(todo => (
           <li key={todo._id}>
-            {todo.title} ({todo.completed ? 'completed' : 'incomplete'})
+            <p>
+              <input checked={todo.completed ? true : false} type="checkbox" name="" id="" />
+              {todo.title}
+              <button className='list__delete'>X</button>
+            </p>
           </li>
         ))}
       </ul>
