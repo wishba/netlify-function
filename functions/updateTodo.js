@@ -1,7 +1,7 @@
 const query = require("./utils/query")
 
 const UPDATE_TODO = `
-  mutation($id: ID!, $title: String, $completed: Boolean) {
+  mutation($id: ID!, $title: String!, $completed: Boolean) {
     updateTodo(id: $id, data: {title: $title, completed: $completed}) {
       _id
       title
