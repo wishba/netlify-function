@@ -2,7 +2,7 @@ const axios = require("axios")
 require("dotenv").config()
 
 module.exports = async (query, variables) => {
-  const result = await axios({
+  const { data: { data, error } } = await axios({
     url: "https://graphql.fauna.com/graphql",
     method: "POST",
     headers: {
@@ -14,5 +14,10 @@ module.exports = async (query, variables) => {
     }
   })
 
-  return result.data
+  if (error) {
+    console.error(error)
+    throw error
+  }
+
+  return data
 }

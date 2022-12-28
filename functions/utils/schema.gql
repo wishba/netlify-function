@@ -4,6 +4,5 @@ type Todo {
 }
 
 type Query {
-   allTodos: [Todo!]
-   todosByCompletedFlag(completed: Boolean!): [Todo!]
+   allTodos: [Todo!]!
 }

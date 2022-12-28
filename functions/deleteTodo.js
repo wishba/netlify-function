@@ -1,4 +1,4 @@
-const query = require("./utils/query")
+const sendQuery = require("./utils/sendQuery")
 
 const DELETE_TODO = `
   mutation($id: ID!) {
@@ -10,17 +10,23 @@ const DELETE_TODO = `
 
 exports.handler = async event => {
   const { id } = JSON.parse(event.body)
-  const { data, errors } = await query(DELETE_TODO, { id })
+  const variables = { id }
 
-  if (errors) {
+  try {
+    const { deleteTodo } = await sendQuery(
+      DELETE_TODO,
+      variables
+    )
+    return {
+      statusCode: 200,
+      body: JSON.stringify(deleteTodo)
+    }
+
+  } catch (error) {
+    console.error(error)
     return {
       statusCode: 500,
-      body: JSON.stringify(errors)
+      body: JSON.stringify(error)
     }
-  }
-
-  return {
-    statusCode: 200,
-    body: JSON.stringify({ graphql: data.deleteTodo })
   }
 }

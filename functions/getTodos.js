@@ -1,4 +1,4 @@
-const query = require("./utils/query")
+const sendQuery = require("./utils/sendQuery")
 
 const GET_TODOS = `
   query {
@@ -13,17 +13,19 @@ const GET_TODOS = `
 `
 
 exports.handler = async () => {
-  const { data, errors } = await query(GET_TODOS)
+  try {
+    const response = await sendQuery(GET_TODOS)
+    const data = response.allTodos.data
+    return {
+      statusCode: 200,
+      body: JSON.stringify(data)
+    }
 
-  if (errors) {
+  } catch (error) {
+    console.error(error)
     return {
       statusCode: 500,
-      body: JSON.stringify(errors)
+      body: JSON.stringify(error)
     }
-  }
-
-  return {
-    statusCode: 200,
-    body: JSON.stringify({ graphql: data.allTodos.data })
   }
 }

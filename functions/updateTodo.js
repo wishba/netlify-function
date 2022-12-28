@@ -1,4 +1,4 @@
-const query = require("./utils/query")
+const sendQuery = require("./utils/sendQuery")
 
 const UPDATE_TODO = `
   mutation($id: ID!, $title: String!, $completed: Boolean) {
@@ -12,17 +12,23 @@ const UPDATE_TODO = `
 
 exports.handler = async event => {
   const { id, title, completed } = JSON.parse(event.body)
-  const { data, errors } = await query(UPDATE_TODO, { id, title, completed })
+  const variables = { id, title, completed }
 
-  if (errors) {
+  try {
+    const { updateTodo } = await sendQuery(
+      UPDATE_TODO,
+      variables
+    )
+    return {
+      statusCode: 200,
+      body: JSON.stringify(updateTodo)
+    }
+
+  } catch (error) {
+    console.error(error)
     return {
       statusCode: 500,
-      body: JSON.stringify(errors)
+      body: JSON.stringify(error)
     }
-  }
-
-  return {
-    statusCode: 200,
-    body: JSON.stringify({ graphql: data.updateTodo })
   }
 }

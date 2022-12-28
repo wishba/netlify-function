@@ -1,4 +1,4 @@
-const query = require("./utils/query")
+const sendQuery = require("./utils/sendQuery")
 
 const CREATE_TODO = `
   mutation($title: String!, $completed: Boolean) {
@@ -11,18 +11,24 @@ const CREATE_TODO = `
 `
 
 exports.handler = async event => {
-  const { title, completed } = JSON.parse(event.body)
-  const { data, errors } = await query(CREATE_TODO, { title, completed })
+  const { title } = JSON.parse(event.body)
+  const variables = { title, completed: false }
 
-  if (errors) {
+  try {
+    const { createTodo } = await sendQuery(
+      CREATE_TODO,
+      variables
+    )
+    return {
+      statusCode: 200,
+      body: JSON.stringify(createTodo)
+    }
+
+  } catch (error) {
+    console.error(error)
     return {
       statusCode: 500,
-      body: JSON.stringify(errors)
+      body: JSON.stringify(error)
     }
-  }
-
-  return {
-    statusCode: 200,
-    body: JSON.stringify({ graphql: data.createTodo })
   }
 }
