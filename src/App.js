@@ -4,27 +4,78 @@ import { useEffect, useState } from 'react';
 function App() {
   const [todos, setTodos] = useState([])
 
-  useEffect(() => {
-    (async () => {
-      try {
-        const response = await fetch('/.netlify/functions/getTodos')
-        const todos = await response.json()
-        setTodos(todos)
+  const loadTodos = async () => {
+    try {
+      const response = await fetch('/.netlify/functions/getTodos')
+      const todos = await response.json()
+      setTodos(todos)
 
-      } catch (error) {
-        console.error(error)
-      }
-    })()
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  useEffect(() => {
+    loadTodos()
   }, [])
 
-  function handleCheck() {
-    console.log('check')
+  const [title, setTitle] = useState('')
+
+  const handleSubmit = async (event) => {
+    event.preventDefault()
+
+    const body = { title }
+
+    try {
+      await fetch('/.netlify/functions/createTodo', {
+        method: 'POST',
+        body: JSON.stringify(body)
+      })
+
+      loadTodos()
+
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  const checkTodo = async (todo) => {
+    console.log(todo)
+
+  }
+
+  const deleteTodo = async (todo) => {
+    console.log(todo)
+
   }
 
   return (
     <div className='app'>
       <div>
         <h1>todo!</h1>
+
+        <form
+          className='form'
+          onSubmit={handleSubmit}
+        >
+          <div>
+            <label htmlFor="title">Activity:</label>
+            <input
+              className='form__fill'
+              type="text"
+              name="title"
+              id="title"
+              value={title}
+              onChange={(event) => setTitle(event.target.value)}
+            />
+          </div>
+          <div>
+            <label htmlFor="complete">Completed:</label>
+            <input className='form__fill' type="checkbox" name="complete" id="complete" />
+          </div>
+          <input type="submit" value="todo" />
+        </form>
+
         <ul className='list'>
           {todos.map((todo) => (
             <li
@@ -35,10 +86,13 @@ function App() {
                 className='list__checkbox'
                 type="checkbox"
                 checked={todo.completed}
-                onChange={handleCheck}
+                onChange={() => checkTodo(todo)}
               />
               <p className='list__title'>{todo.title}</p>
-              <button className='list__button'>delete</button>
+              <button
+                className='list__button'
+                onClick={() => deleteTodo(todo)}
+              >delete</button>
             </li>
           ))}
         </ul>
