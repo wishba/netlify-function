@@ -2,3 +2,34 @@
   --color-dark: #282c34;
   --color-light: white;
 }
+
+h1 {
+  text-align: center;
+}
+
+.app {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.list {
+  padding: 1rem;
+}
+
+.list__todo {
+  list-style: none;
+}
+
+.list__todo>* {
+  display: inline;
+}
+
+.list__checkbox {
+  margin: 0;
+}
+
+.list__title,
+.list__button {
+  margin-left: .25rem;
+}

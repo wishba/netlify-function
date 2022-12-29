@@ -1,24 +1,48 @@
-import logo from './logo.svg';
 import './App.css';
-import axios from 'axios';
 import { useEffect, useState } from 'react';
 
 function App() {
-
-  const [message, setMessage] = useState('text')
-
-  const fetchData = async () => {
-    const result = await axios.get('/.netlify/functions/helloWorld')
-    setMessage(result.data.message)
-  }
+  const [todos, setTodos] = useState([])
 
   useEffect(() => {
-    fetchData()
+    (async () => {
+      try {
+        const response = await fetch('/.netlify/functions/getTodos')
+        const todos = await response.json()
+        setTodos(todos)
+
+      } catch (error) {
+        console.error(error)
+      }
+    })()
   }, [])
 
+  function handleCheck() {
+    console.log('check')
+  }
+
   return (
-    <div className="App">
-      <p>{message}</p>
+    <div className='app'>
+      <div>
+        <h1>todo!</h1>
+        <ul className='list'>
+          {todos.map((todo) => (
+            <li
+              className='list__todo'
+              key={todo._id}
+            >
+              <input
+                className='list__checkbox'
+                type="checkbox"
+                checked={todo.completed}
+                onChange={handleCheck}
+              />
+              <p className='list__title'>{todo.title}</p>
+              <button className='list__button'>delete</button>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 }
