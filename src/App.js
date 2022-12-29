@@ -45,8 +45,17 @@ function App() {
   }
 
   const deleteTodo = async (todo) => {
-    console.log(todo)
+    try {
+      await fetch('/.netlify/functions/deleteTodo', {
+        method: 'DELETE',
+        body: JSON.stringify({ id: todo._id })
+      })
 
+      loadTodos()
+
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   return (
