@@ -40,8 +40,17 @@ function App() {
   }
 
   const checkTodo = async (todo) => {
-    console.log(todo)
+    try {
+      await fetch('/.netlify/functions/updateTodo', {
+        method: 'PUT',
+        body: JSON.stringify({ id: todo._id, title: todo.title, completed: !todo.completed })
+      })
 
+      loadTodos()
+
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   const deleteTodo = async (todo) => {
