@@ -110,7 +110,7 @@ function App() {
               <button
                 className='list__button'
                 onClick={() => deleteTodo(todo)}
-              >delete</button>
+              >x</button>
             </li>
           ))}
         </ul>
