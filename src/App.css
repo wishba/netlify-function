@@ -2,6 +2,10 @@ h1 {
   text-align: center;
 }
 
+[type=checkbox] {
+  transform: translateY(.1rem);
+}
+
 .app {
   display: flex;
   align-items: center;
@@ -11,10 +15,6 @@ h1 {
 .app>* {
   margin-top: 2rem;
   border: 1px solid black;
-}
-
-.form input[type=checkbox] {
-  transform: translateY(.1rem);
 }
 
 .form__fill {
@@ -43,4 +43,10 @@ h1 {
 .list__title,
 .list__button {
   margin-left: .25rem;
+}
+
+.list__button {
+  padding: 0;
+  line-height: .5rem;
+  transform: translateY(-.1rem);
 }
