@@ -15,6 +15,7 @@ h1 {
 
 .list {
   padding: 1rem;
+  max-width: 30rem;
 }
 
 .list__todo {
