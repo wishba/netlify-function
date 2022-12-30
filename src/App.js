@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react';
 
 function App() {
   const [todos, setTodos] = useState([])
-
   const loadTodos = async () => {
     try {
       const response = await fetch('/.netlify/functions/getTodos')
@@ -14,30 +13,28 @@ function App() {
       console.error(error)
     }
   }
-
   useEffect(() => {
     loadTodos()
   }, [])
 
-  const [title, setTitle] = useState('')
 
+  const [title, setTitle] = useState('')
   const handleSubmit = async (event) => {
     event.preventDefault()
 
     const body = { title }
-
     try {
       await fetch('/.netlify/functions/createTodo', {
         method: 'POST',
         body: JSON.stringify(body)
       })
-
       loadTodos()
 
     } catch (error) {
       console.error(error);
     }
   }
+
 
   const checkTodo = async (todo) => {
     try {
@@ -45,13 +42,13 @@ function App() {
         method: 'PUT',
         body: JSON.stringify({ id: todo._id, title: todo.title, completed: !todo.completed })
       })
-
       loadTodos()
 
     } catch (error) {
       console.error(error);
     }
   }
+
 
   const deleteTodo = async (todo) => {
     try {
@@ -59,7 +56,6 @@ function App() {
         method: 'DELETE',
         body: JSON.stringify({ id: todo._id })
       })
-
       loadTodos()
 
     } catch (error) {
@@ -67,15 +63,14 @@ function App() {
     }
   }
 
+
   return (
     <div className='app'>
       <div>
         <h1>todo!</h1>
 
-        <form
-          className='form'
-          onSubmit={handleSubmit}
-        >
+
+        <form className='form' onSubmit={handleSubmit}>
           <div>
             <label htmlFor="title">Activity:</label>
             <input
@@ -89,17 +84,20 @@ function App() {
           </div>
           <div>
             <label htmlFor="complete">Completed:</label>
-            <input className='form__fill' type="checkbox" name="complete" id="complete" />
+            <input
+              className='form__fill'
+              type="checkbox"
+              name="complete"
+              id="complete"
+            />
           </div>
           <input type="submit" value="todo" />
         </form>
 
+
         <ul className='list'>
           {todos.map((todo) => (
-            <li
-              className='list__todo'
-              key={todo._id}
-            >
+            <li className='list__todo' key={todo._id} >
               <input
                 className='list__checkbox'
                 type="checkbox"
